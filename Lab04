@@ -1,0 +1,33 @@
+def simular_afd(estados, inicial, finais, alfabeto, transicoes, palavras):
+    for palavra in palavras:
+        estado_atual = inicial
+        for simbolo in palavra:
+            if simbolo not in alfabeto:
+                estado_atual = None
+                break
+            estado_atual = transicoes[estado_atual][alfabeto.index(simbolo)]
+        if estado_atual in finais:
+            print("aceita")
+        else:
+            print("rejeita")
+
+
+# ===== Entrada do exemplo =====
+estados = input().split()                   # q0 q1 q2
+inicial = input().strip()                   # q0
+finais = input().split()                    # q2
+alfabeto = input().split()                  # 0 1
+
+# Transições
+transicoes = {}
+for _ in range(len(estados)):
+    linha = input().split()
+    estado = linha[0]
+    destinos = linha[1:]
+    transicoes[estado] = destinos
+
+# Palavras
+palavras = input().split()
+
+# ===== Simulação =====
+simular_afd(estados, inicial, finais, alfabeto, transicoes, palavras)
